@@ -726,6 +726,7 @@ class ThreadDetailPage extends HookConsumerWidget {
         visible: visible,
         bottom: threadTailIsVisible() ? replies.last : null,
         threadRootId: queryRootId,
+        isRootThread: threadHead.parentId == null,
       );
       final notifier = ref.read(readStateProvider.notifier);
       for (final mark in marks.entries) {
@@ -747,7 +748,7 @@ class ThreadDetailPage extends HookConsumerWidget {
           appInUse &&
           (ModalRoute.of(context)?.isCurrent ?? true),
       onDwell: readVisibleReplies,
-      keys: [threadHead.id, allMsgs, timelineBottomInset],
+      keys: [threadHead.id, readingContentKey(allMsgs), timelineBottomInset],
     );
 
     // Thread-scoped typing indicators (exclude self).
